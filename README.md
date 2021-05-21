@@ -1,1 +1,1 @@
-# Animeshon Protocol Buffers for Golang
+# Animeshon Protocol Buffers for Go

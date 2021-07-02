@@ -47,9 +47,10 @@ type ServiceAccount struct {
 	// A brief description of what this service account is used for.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// The names of the OAuth 2.0 scopes this service account was granted.
-	Oauth2Scopes   []string `protobuf:"bytes,4,rep,name=oauth2_scopes,json=oauth2Scopes,proto3" json:"oauth2_scopes,omitempty"`
-	Oauth2ClientId string   `protobuf:"bytes,5,opt,name=oauth2_client_id,json=oauth2ClientId,proto3" json:"oauth2_client_id,omitempty"`
-	// The secret of this service account, available only during creation.
+	Oauth2Scopes []string `protobuf:"bytes,4,rep,name=oauth2_scopes,json=oauth2Scopes,proto3" json:"oauth2_scopes,omitempty"`
+	// OAuth2 client ID to use for the authentication flow.
+	Oauth2ClientId string `protobuf:"bytes,5,opt,name=oauth2_client_id,json=oauth2ClientId,proto3" json:"oauth2_client_id,omitempty"`
+	// OAuth2 client secret to use for the authentication flow.
 	Oauth2ClientSecret string `protobuf:"bytes,6,opt,name=oauth2_client_secret,json=oauth2ClientSecret,proto3" json:"oauth2_client_secret,omitempty"`
 }
 

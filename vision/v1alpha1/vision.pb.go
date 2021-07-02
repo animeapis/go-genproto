@@ -1223,6 +1223,7 @@ const _ = grpc.SupportPackageIsVersion6
 type ImageAnnotatorClient interface {
 	CreateImageReport(ctx context.Context, in *CreateImageReportRequest, opts ...grpc.CallOption) (*ImageReport, error)
 	ListImageReports(ctx context.Context, in *ListImageReportsRequest, opts ...grpc.CallOption) (*ListImageReportsResponse, error)
+	// Note: to fetch the latest available report use "latest" as report id.
 	GetImageReport(ctx context.Context, in *GetImageReportRequest, opts ...grpc.CallOption) (*ImageReport, error)
 	DeleteImageReport(ctx context.Context, in *DeleteImageReportRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateImageAnnotationHint(ctx context.Context, in *CreateImageAnnotationHintRequest, opts ...grpc.CallOption) (*ImageAnnotationHint, error)
@@ -1325,6 +1326,7 @@ func (c *imageAnnotatorClient) DeleteImageAnnotationHint(ctx context.Context, in
 type ImageAnnotatorServer interface {
 	CreateImageReport(context.Context, *CreateImageReportRequest) (*ImageReport, error)
 	ListImageReports(context.Context, *ListImageReportsRequest) (*ListImageReportsResponse, error)
+	// Note: to fetch the latest available report use "latest" as report id.
 	GetImageReport(context.Context, *GetImageReportRequest) (*ImageReport, error)
 	DeleteImageReport(context.Context, *DeleteImageReportRequest) (*emptypb.Empty, error)
 	CreateImageAnnotationHint(context.Context, *CreateImageAnnotationHintRequest) (*ImageAnnotationHint, error)

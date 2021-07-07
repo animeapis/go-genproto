@@ -105,7 +105,9 @@ type Tracker struct {
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// When the progress ended.
 	EndTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	// The percentage of progress from 1 to 100.
+	// The percentage of progress from 0 to 100.
+	// null means the percentage should be calculated based on the amount of
+	// subitems in the item being tracked.
 	ProgressPercentage *wrapperspb.FloatValue `protobuf:"bytes,6,opt,name=progress_percentage,json=progressPercentage,proto3" json:"progress_percentage,omitempty"`
 	// The progress state of the tracker.
 	State State `protobuf:"varint,7,opt,name=state,proto3,enum=animeshon.tracker.v1alpha1.State" json:"state,omitempty"`

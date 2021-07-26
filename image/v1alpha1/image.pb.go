@@ -1491,7 +1491,9 @@ type ImageClient interface {
 	CreateFolder(ctx context.Context, in *CreateFolderRequest, opts ...grpc.CallOption) (*Folder, error)
 	// Deletes an existing image folder.
 	DeleteFolder(ctx context.Context, in *DeleteFolderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets the settings of an image folder.
 	GetFolderSettings(ctx context.Context, in *GetFolderSettingsRequest, opts ...grpc.CallOption) (*FolderSettings, error)
+	// Updates the settings of an image folder.
 	UpdateFolderSettings(ctx context.Context, in *UpdateFolderSettingsRequest, opts ...grpc.CallOption) (*FolderSettings, error)
 }
 
@@ -1578,7 +1580,9 @@ type ImageServer interface {
 	CreateFolder(context.Context, *CreateFolderRequest) (*Folder, error)
 	// Deletes an existing image folder.
 	DeleteFolder(context.Context, *DeleteFolderRequest) (*emptypb.Empty, error)
+	// Gets the settings of an image folder.
 	GetFolderSettings(context.Context, *GetFolderSettingsRequest) (*FolderSettings, error)
+	// Updates the settings of an image folder.
 	UpdateFolderSettings(context.Context, *UpdateFolderSettingsRequest) (*FolderSettings, error)
 }
 

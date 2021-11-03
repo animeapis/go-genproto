@@ -812,6 +812,7 @@ type EntryEntity struct {
 	//	*EntryEntity_Person
 	//	*EntryEntity_Track
 	//	*EntryEntity_Universe
+	//	*EntryEntity_VisualNovel
 	//	*EntryEntity_Volume
 	Entity isEntryEntity_Entity `protobuf_oneof:"entity"`
 }
@@ -939,6 +940,13 @@ func (x *EntryEntity) GetUniverse() *Universe {
 	return nil
 }
 
+func (x *EntryEntity) GetVisualNovel() *VisualNovel {
+	if x, ok := x.GetEntity().(*EntryEntity_VisualNovel); ok {
+		return x.VisualNovel
+	}
+	return nil
+}
+
 func (x *EntryEntity) GetVolume() *Volume {
 	if x, ok := x.GetEntity().(*EntryEntity_Volume); ok {
 		return x.Volume
@@ -998,8 +1006,12 @@ type EntryEntity_Universe struct {
 	Universe *Universe `protobuf:"bytes,12,opt,name=universe,proto3,oneof"`
 }
 
+type EntryEntity_VisualNovel struct {
+	VisualNovel *VisualNovel `protobuf:"bytes,13,opt,name=visual_novel,json=visualNovel,proto3,oneof"`
+}
+
 type EntryEntity_Volume struct {
-	Volume *Volume `protobuf:"bytes,13,opt,name=volume,proto3,oneof"`
+	Volume *Volume `protobuf:"bytes,14,opt,name=volume,proto3,oneof"`
 }
 
 func (*EntryEntity_Anime) isEntryEntity_Entity() {}
@@ -1025,6 +1037,8 @@ func (*EntryEntity_Person) isEntryEntity_Entity() {}
 func (*EntryEntity_Track) isEntryEntity_Entity() {}
 
 func (*EntryEntity_Universe) isEntryEntity_Entity() {}
+
+func (*EntryEntity_VisualNovel) isEntryEntity_Entity() {}
 
 func (*EntryEntity_Volume) isEntryEntity_Entity() {}
 
@@ -5519,7 +5533,7 @@ var file_animeshon_knowledge_v1alpha1_knowledge_proto_rawDesc = []byte{
 	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x34, 0x0a, 0x19, 0x52, 0x65, 0x6a, 0x65, 0x63, 0x74,
 	0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x42, 0x03, 0xe0, 0x41, 0x02, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0xb1, 0x07, 0x0a,
+	0x09, 0x42, 0x03, 0xe0, 0x41, 0x02, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x81, 0x08, 0x0a,
 	0x0b, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x45, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x3b, 0x0a, 0x05,
 	0x61, 0x6e, 0x69, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x61, 0x6e,
 	0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67,
@@ -5574,8 +5588,13 @@ var file_animeshon_knowledge_v1alpha1_knowledge_proto_rawDesc = []byte{
 	0x28, 0x0b, 0x32, 0x26, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x6b,
 	0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
 	0x31, 0x2e, 0x55, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x65, 0x48, 0x00, 0x52, 0x08, 0x75, 0x6e,
-	0x69, 0x76, 0x65, 0x72, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x06, 0x76, 0x6f, 0x6c, 0x75, 0x6d, 0x65,
-	0x18, 0x0d, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68,
+	0x69, 0x76, 0x65, 0x72, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0c, 0x76, 0x69, 0x73, 0x75, 0x61, 0x6c,
+	0x5f, 0x6e, 0x6f, 0x76, 0x65, 0x6c, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x61,
+	0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64,
+	0x67, 0x65, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x56, 0x69, 0x73, 0x75,
+	0x61, 0x6c, 0x4e, 0x6f, 0x76, 0x65, 0x6c, 0x48, 0x00, 0x52, 0x0b, 0x76, 0x69, 0x73, 0x75, 0x61,
+	0x6c, 0x4e, 0x6f, 0x76, 0x65, 0x6c, 0x12, 0x3e, 0x0a, 0x06, 0x76, 0x6f, 0x6c, 0x75, 0x6d, 0x65,
+	0x18, 0x0e, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68,
 	0x6f, 0x6e, 0x2e, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x2e, 0x76, 0x31, 0x61,
 	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x56, 0x6f, 0x6c, 0x75, 0x6d, 0x65, 0x48, 0x00, 0x52, 0x06,
 	0x76, 0x6f, 0x6c, 0x75, 0x6d, 0x65, 0x42, 0x08, 0x0a, 0x06, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79,
@@ -6676,171 +6695,172 @@ var file_animeshon_knowledge_v1alpha1_knowledge_proto_depIdxs = []int32{
 	23,  // 19: animeshon.knowledge.v1alpha1.EntryEntity.person:type_name -> animeshon.knowledge.v1alpha1.Person
 	24,  // 20: animeshon.knowledge.v1alpha1.EntryEntity.track:type_name -> animeshon.knowledge.v1alpha1.Track
 	25,  // 21: animeshon.knowledge.v1alpha1.EntryEntity.universe:type_name -> animeshon.knowledge.v1alpha1.Universe
-	27,  // 22: animeshon.knowledge.v1alpha1.EntryEntity.volume:type_name -> animeshon.knowledge.v1alpha1.Volume
-	30,  // 23: animeshon.knowledge.v1alpha1.Anime.episodes:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 24: animeshon.knowledge.v1alpha1.Anime.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 25: animeshon.knowledge.v1alpha1.Anime.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 26: animeshon.knowledge.v1alpha1.Anime.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 27: animeshon.knowledge.v1alpha1.Anime.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 28: animeshon.knowledge.v1alpha1.Anime.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	31,  // 29: animeshon.knowledge.v1alpha1.Anime.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
-	29,  // 30: animeshon.knowledge.v1alpha1.Anime.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
-	39,  // 31: animeshon.knowledge.v1alpha1.Anime.release_date:type_name -> google.protobuf.Timestamp
-	32,  // 32: animeshon.knowledge.v1alpha1.Anime.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 33: animeshon.knowledge.v1alpha1.Anime.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 34: animeshon.knowledge.v1alpha1.Anime.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 35: animeshon.knowledge.v1alpha1.Anime.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	37,  // 36: animeshon.knowledge.v1alpha1.Anime.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
-	34,  // 37: animeshon.knowledge.v1alpha1.Anime.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
-	28,  // 38: animeshon.knowledge.v1alpha1.Canonical.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 39: animeshon.knowledge.v1alpha1.Canonical.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 40: animeshon.knowledge.v1alpha1.Canonical.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 41: animeshon.knowledge.v1alpha1.Canonical.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 42: animeshon.knowledge.v1alpha1.Canonical.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	30,  // 43: animeshon.knowledge.v1alpha1.Canonical.contents:type_name -> animeshon.knowledge.v1alpha1.Edge
-	39,  // 44: animeshon.knowledge.v1alpha1.Chapter.release_date:type_name -> google.protobuf.Timestamp
-	28,  // 45: animeshon.knowledge.v1alpha1.Chapter.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 46: animeshon.knowledge.v1alpha1.Chapter.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 47: animeshon.knowledge.v1alpha1.Chapter.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 48: animeshon.knowledge.v1alpha1.Chapter.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 49: animeshon.knowledge.v1alpha1.Chapter.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	32,  // 50: animeshon.knowledge.v1alpha1.Chapter.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 51: animeshon.knowledge.v1alpha1.Chapter.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 52: animeshon.knowledge.v1alpha1.Chapter.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 53: animeshon.knowledge.v1alpha1.Character.hometown:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 54: animeshon.knowledge.v1alpha1.Character.birthplace:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 55: animeshon.knowledge.v1alpha1.Character.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 56: animeshon.knowledge.v1alpha1.Character.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 57: animeshon.knowledge.v1alpha1.Character.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 58: animeshon.knowledge.v1alpha1.Character.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 59: animeshon.knowledge.v1alpha1.Character.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	30,  // 60: animeshon.knowledge.v1alpha1.Character.guise_of:type_name -> animeshon.knowledge.v1alpha1.Edge
-	39,  // 61: animeshon.knowledge.v1alpha1.Episode.release_date:type_name -> google.protobuf.Timestamp
-	28,  // 62: animeshon.knowledge.v1alpha1.Episode.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 63: animeshon.knowledge.v1alpha1.Episode.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 64: animeshon.knowledge.v1alpha1.Episode.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 65: animeshon.knowledge.v1alpha1.Episode.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 66: animeshon.knowledge.v1alpha1.Episode.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	32,  // 67: animeshon.knowledge.v1alpha1.Episode.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 68: animeshon.knowledge.v1alpha1.Episode.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	37,  // 69: animeshon.knowledge.v1alpha1.Episode.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
-	34,  // 70: animeshon.knowledge.v1alpha1.Episode.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
-	39,  // 71: animeshon.knowledge.v1alpha1.GameRelease.release_date:type_name -> google.protobuf.Timestamp
-	28,  // 72: animeshon.knowledge.v1alpha1.GameRelease.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 73: animeshon.knowledge.v1alpha1.GameRelease.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 74: animeshon.knowledge.v1alpha1.GameRelease.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 75: animeshon.knowledge.v1alpha1.GameRelease.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 76: animeshon.knowledge.v1alpha1.GameRelease.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	32,  // 77: animeshon.knowledge.v1alpha1.GameRelease.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 78: animeshon.knowledge.v1alpha1.GameRelease.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	37,  // 79: animeshon.knowledge.v1alpha1.GameRelease.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
-	34,  // 80: animeshon.knowledge.v1alpha1.GameRelease.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
-	30,  // 81: animeshon.knowledge.v1alpha1.GraphicNovel.chapters:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 82: animeshon.knowledge.v1alpha1.GraphicNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 83: animeshon.knowledge.v1alpha1.GraphicNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 84: animeshon.knowledge.v1alpha1.GraphicNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 85: animeshon.knowledge.v1alpha1.GraphicNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 86: animeshon.knowledge.v1alpha1.GraphicNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	31,  // 87: animeshon.knowledge.v1alpha1.GraphicNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
-	29,  // 88: animeshon.knowledge.v1alpha1.GraphicNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
-	39,  // 89: animeshon.knowledge.v1alpha1.GraphicNovel.release_date:type_name -> google.protobuf.Timestamp
-	32,  // 90: animeshon.knowledge.v1alpha1.GraphicNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 91: animeshon.knowledge.v1alpha1.GraphicNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 92: animeshon.knowledge.v1alpha1.GraphicNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 93: animeshon.knowledge.v1alpha1.GraphicNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 94: animeshon.knowledge.v1alpha1.GraphicNovel.volumes:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 95: animeshon.knowledge.v1alpha1.LightNovel.chapters:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 96: animeshon.knowledge.v1alpha1.LightNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 97: animeshon.knowledge.v1alpha1.LightNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 98: animeshon.knowledge.v1alpha1.LightNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 99: animeshon.knowledge.v1alpha1.LightNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 100: animeshon.knowledge.v1alpha1.LightNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	31,  // 101: animeshon.knowledge.v1alpha1.LightNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
-	29,  // 102: animeshon.knowledge.v1alpha1.LightNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
-	39,  // 103: animeshon.knowledge.v1alpha1.LightNovel.release_date:type_name -> google.protobuf.Timestamp
-	32,  // 104: animeshon.knowledge.v1alpha1.LightNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 105: animeshon.knowledge.v1alpha1.LightNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 106: animeshon.knowledge.v1alpha1.LightNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 107: animeshon.knowledge.v1alpha1.LightNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 108: animeshon.knowledge.v1alpha1.LightNovel.volumes:type_name -> animeshon.knowledge.v1alpha1.Edge
-	39,  // 109: animeshon.knowledge.v1alpha1.Organization.foundation_date:type_name -> google.protobuf.Timestamp
-	28,  // 110: animeshon.knowledge.v1alpha1.Organization.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 111: animeshon.knowledge.v1alpha1.Organization.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 112: animeshon.knowledge.v1alpha1.Organization.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 113: animeshon.knowledge.v1alpha1.Organization.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	39,  // 114: animeshon.knowledge.v1alpha1.Person.birthday:type_name -> google.protobuf.Timestamp
-	28,  // 115: animeshon.knowledge.v1alpha1.Person.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 116: animeshon.knowledge.v1alpha1.Person.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 117: animeshon.knowledge.v1alpha1.Person.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 118: animeshon.knowledge.v1alpha1.Person.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	39,  // 119: animeshon.knowledge.v1alpha1.Track.release_date:type_name -> google.protobuf.Timestamp
-	28,  // 120: animeshon.knowledge.v1alpha1.Track.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 121: animeshon.knowledge.v1alpha1.Track.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 122: animeshon.knowledge.v1alpha1.Track.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 123: animeshon.knowledge.v1alpha1.Track.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 124: animeshon.knowledge.v1alpha1.Track.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	33,  // 125: animeshon.knowledge.v1alpha1.Track.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 126: animeshon.knowledge.v1alpha1.Track.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 127: animeshon.knowledge.v1alpha1.Track.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 128: animeshon.knowledge.v1alpha1.Universe.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 129: animeshon.knowledge.v1alpha1.Universe.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 130: animeshon.knowledge.v1alpha1.Universe.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 131: animeshon.knowledge.v1alpha1.Universe.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 132: animeshon.knowledge.v1alpha1.Universe.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	30,  // 133: animeshon.knowledge.v1alpha1.Universe.contents:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 134: animeshon.knowledge.v1alpha1.Universe.canonicals:type_name -> animeshon.knowledge.v1alpha1.Edge
-	28,  // 135: animeshon.knowledge.v1alpha1.VisualNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 136: animeshon.knowledge.v1alpha1.VisualNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 137: animeshon.knowledge.v1alpha1.VisualNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 138: animeshon.knowledge.v1alpha1.VisualNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 139: animeshon.knowledge.v1alpha1.VisualNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	31,  // 140: animeshon.knowledge.v1alpha1.VisualNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
-	29,  // 141: animeshon.knowledge.v1alpha1.VisualNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
-	39,  // 142: animeshon.knowledge.v1alpha1.VisualNovel.release_date:type_name -> google.protobuf.Timestamp
-	32,  // 143: animeshon.knowledge.v1alpha1.VisualNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 144: animeshon.knowledge.v1alpha1.VisualNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	30,  // 145: animeshon.knowledge.v1alpha1.VisualNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 146: animeshon.knowledge.v1alpha1.VisualNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
-	37,  // 147: animeshon.knowledge.v1alpha1.VisualNovel.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
-	34,  // 148: animeshon.knowledge.v1alpha1.VisualNovel.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
-	39,  // 149: animeshon.knowledge.v1alpha1.Volume.release_date:type_name -> google.protobuf.Timestamp
-	28,  // 150: animeshon.knowledge.v1alpha1.Volume.names:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 151: animeshon.knowledge.v1alpha1.Volume.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
-	28,  // 152: animeshon.knowledge.v1alpha1.Volume.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
-	35,  // 153: animeshon.knowledge.v1alpha1.Volume.websites:type_name -> animeshon.knowledge.v1alpha1.Website
-	36,  // 154: animeshon.knowledge.v1alpha1.Volume.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
-	32,  // 155: animeshon.knowledge.v1alpha1.Volume.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
-	33,  // 156: animeshon.knowledge.v1alpha1.Volume.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
-	39,  // 157: animeshon.knowledge.v1alpha1.Running.start_time:type_name -> google.protobuf.Timestamp
-	39,  // 158: animeshon.knowledge.v1alpha1.Running.end_time:type_name -> google.protobuf.Timestamp
-	30,  // 159: animeshon.knowledge.v1alpha1.ContentRelation.related:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 160: animeshon.knowledge.v1alpha1.Cast.character:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 161: animeshon.knowledge.v1alpha1.Collaboration.collaborator:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 162: animeshon.knowledge.v1alpha1.VoiceActing.voiced:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 163: animeshon.knowledge.v1alpha1.VoiceActing.actor:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 164: animeshon.knowledge.v1alpha1.Soundtrack.track:type_name -> animeshon.knowledge.v1alpha1.Edge
-	30,  // 165: animeshon.knowledge.v1alpha1.TrackListing.musicRelease:type_name -> animeshon.knowledge.v1alpha1.Edge
-	10,  // 166: animeshon.knowledge.v1alpha1.Knowledge.GetContribution:input_type -> animeshon.knowledge.v1alpha1.GetContributionRequest
-	7,   // 167: animeshon.knowledge.v1alpha1.Knowledge.ListContributions:input_type -> animeshon.knowledge.v1alpha1.ListContributionsRequest
-	6,   // 168: animeshon.knowledge.v1alpha1.Knowledge.CreateContribution:input_type -> animeshon.knowledge.v1alpha1.CreateContributionRequest
-	9,   // 169: animeshon.knowledge.v1alpha1.Knowledge.GetContributionChanges:input_type -> animeshon.knowledge.v1alpha1.GetContributionChangesRequest
-	5,   // 170: animeshon.knowledge.v1alpha1.Knowledge.ReviewContribution:input_type -> animeshon.knowledge.v1alpha1.ReviewContributionRequest
-	11,  // 171: animeshon.knowledge.v1alpha1.Knowledge.ApproveContribution:input_type -> animeshon.knowledge.v1alpha1.ApproveContributionRequest
-	12,  // 172: animeshon.knowledge.v1alpha1.Knowledge.RejectContribution:input_type -> animeshon.knowledge.v1alpha1.RejectContributionRequest
-	1,   // 173: animeshon.knowledge.v1alpha1.Knowledge.AllocateResourceName:input_type -> animeshon.knowledge.v1alpha1.AllocateResourceNameRequest
-	4,   // 174: animeshon.knowledge.v1alpha1.Knowledge.GetContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
-	8,   // 175: animeshon.knowledge.v1alpha1.Knowledge.ListContributions:output_type -> animeshon.knowledge.v1alpha1.ListContributionsResponse
-	4,   // 176: animeshon.knowledge.v1alpha1.Knowledge.CreateContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
-	3,   // 177: animeshon.knowledge.v1alpha1.Knowledge.GetContributionChanges:output_type -> animeshon.knowledge.v1alpha1.ContributionChanges
-	4,   // 178: animeshon.knowledge.v1alpha1.Knowledge.ReviewContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
-	4,   // 179: animeshon.knowledge.v1alpha1.Knowledge.ApproveContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
-	4,   // 180: animeshon.knowledge.v1alpha1.Knowledge.RejectContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
-	2,   // 181: animeshon.knowledge.v1alpha1.Knowledge.AllocateResourceName:output_type -> animeshon.knowledge.v1alpha1.AllocateResourceNameResponse
-	174, // [174:182] is the sub-list for method output_type
-	166, // [166:174] is the sub-list for method input_type
-	166, // [166:166] is the sub-list for extension type_name
-	166, // [166:166] is the sub-list for extension extendee
-	0,   // [0:166] is the sub-list for field type_name
+	26,  // 22: animeshon.knowledge.v1alpha1.EntryEntity.visual_novel:type_name -> animeshon.knowledge.v1alpha1.VisualNovel
+	27,  // 23: animeshon.knowledge.v1alpha1.EntryEntity.volume:type_name -> animeshon.knowledge.v1alpha1.Volume
+	30,  // 24: animeshon.knowledge.v1alpha1.Anime.episodes:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 25: animeshon.knowledge.v1alpha1.Anime.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 26: animeshon.knowledge.v1alpha1.Anime.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 27: animeshon.knowledge.v1alpha1.Anime.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 28: animeshon.knowledge.v1alpha1.Anime.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 29: animeshon.knowledge.v1alpha1.Anime.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	31,  // 30: animeshon.knowledge.v1alpha1.Anime.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
+	29,  // 31: animeshon.knowledge.v1alpha1.Anime.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
+	39,  // 32: animeshon.knowledge.v1alpha1.Anime.release_date:type_name -> google.protobuf.Timestamp
+	32,  // 33: animeshon.knowledge.v1alpha1.Anime.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 34: animeshon.knowledge.v1alpha1.Anime.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 35: animeshon.knowledge.v1alpha1.Anime.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 36: animeshon.knowledge.v1alpha1.Anime.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	37,  // 37: animeshon.knowledge.v1alpha1.Anime.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
+	34,  // 38: animeshon.knowledge.v1alpha1.Anime.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
+	28,  // 39: animeshon.knowledge.v1alpha1.Canonical.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 40: animeshon.knowledge.v1alpha1.Canonical.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 41: animeshon.knowledge.v1alpha1.Canonical.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 42: animeshon.knowledge.v1alpha1.Canonical.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 43: animeshon.knowledge.v1alpha1.Canonical.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	30,  // 44: animeshon.knowledge.v1alpha1.Canonical.contents:type_name -> animeshon.knowledge.v1alpha1.Edge
+	39,  // 45: animeshon.knowledge.v1alpha1.Chapter.release_date:type_name -> google.protobuf.Timestamp
+	28,  // 46: animeshon.knowledge.v1alpha1.Chapter.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 47: animeshon.knowledge.v1alpha1.Chapter.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 48: animeshon.knowledge.v1alpha1.Chapter.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 49: animeshon.knowledge.v1alpha1.Chapter.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 50: animeshon.knowledge.v1alpha1.Chapter.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	32,  // 51: animeshon.knowledge.v1alpha1.Chapter.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 52: animeshon.knowledge.v1alpha1.Chapter.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 53: animeshon.knowledge.v1alpha1.Chapter.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 54: animeshon.knowledge.v1alpha1.Character.hometown:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 55: animeshon.knowledge.v1alpha1.Character.birthplace:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 56: animeshon.knowledge.v1alpha1.Character.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 57: animeshon.knowledge.v1alpha1.Character.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 58: animeshon.knowledge.v1alpha1.Character.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 59: animeshon.knowledge.v1alpha1.Character.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 60: animeshon.knowledge.v1alpha1.Character.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	30,  // 61: animeshon.knowledge.v1alpha1.Character.guise_of:type_name -> animeshon.knowledge.v1alpha1.Edge
+	39,  // 62: animeshon.knowledge.v1alpha1.Episode.release_date:type_name -> google.protobuf.Timestamp
+	28,  // 63: animeshon.knowledge.v1alpha1.Episode.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 64: animeshon.knowledge.v1alpha1.Episode.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 65: animeshon.knowledge.v1alpha1.Episode.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 66: animeshon.knowledge.v1alpha1.Episode.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 67: animeshon.knowledge.v1alpha1.Episode.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	32,  // 68: animeshon.knowledge.v1alpha1.Episode.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 69: animeshon.knowledge.v1alpha1.Episode.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	37,  // 70: animeshon.knowledge.v1alpha1.Episode.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
+	34,  // 71: animeshon.knowledge.v1alpha1.Episode.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
+	39,  // 72: animeshon.knowledge.v1alpha1.GameRelease.release_date:type_name -> google.protobuf.Timestamp
+	28,  // 73: animeshon.knowledge.v1alpha1.GameRelease.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 74: animeshon.knowledge.v1alpha1.GameRelease.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 75: animeshon.knowledge.v1alpha1.GameRelease.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 76: animeshon.knowledge.v1alpha1.GameRelease.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 77: animeshon.knowledge.v1alpha1.GameRelease.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	32,  // 78: animeshon.knowledge.v1alpha1.GameRelease.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 79: animeshon.knowledge.v1alpha1.GameRelease.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	37,  // 80: animeshon.knowledge.v1alpha1.GameRelease.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
+	34,  // 81: animeshon.knowledge.v1alpha1.GameRelease.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
+	30,  // 82: animeshon.knowledge.v1alpha1.GraphicNovel.chapters:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 83: animeshon.knowledge.v1alpha1.GraphicNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 84: animeshon.knowledge.v1alpha1.GraphicNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 85: animeshon.knowledge.v1alpha1.GraphicNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 86: animeshon.knowledge.v1alpha1.GraphicNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 87: animeshon.knowledge.v1alpha1.GraphicNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	31,  // 88: animeshon.knowledge.v1alpha1.GraphicNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
+	29,  // 89: animeshon.knowledge.v1alpha1.GraphicNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
+	39,  // 90: animeshon.knowledge.v1alpha1.GraphicNovel.release_date:type_name -> google.protobuf.Timestamp
+	32,  // 91: animeshon.knowledge.v1alpha1.GraphicNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 92: animeshon.knowledge.v1alpha1.GraphicNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 93: animeshon.knowledge.v1alpha1.GraphicNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 94: animeshon.knowledge.v1alpha1.GraphicNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 95: animeshon.knowledge.v1alpha1.GraphicNovel.volumes:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 96: animeshon.knowledge.v1alpha1.LightNovel.chapters:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 97: animeshon.knowledge.v1alpha1.LightNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 98: animeshon.knowledge.v1alpha1.LightNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 99: animeshon.knowledge.v1alpha1.LightNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 100: animeshon.knowledge.v1alpha1.LightNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 101: animeshon.knowledge.v1alpha1.LightNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	31,  // 102: animeshon.knowledge.v1alpha1.LightNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
+	29,  // 103: animeshon.knowledge.v1alpha1.LightNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
+	39,  // 104: animeshon.knowledge.v1alpha1.LightNovel.release_date:type_name -> google.protobuf.Timestamp
+	32,  // 105: animeshon.knowledge.v1alpha1.LightNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 106: animeshon.knowledge.v1alpha1.LightNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 107: animeshon.knowledge.v1alpha1.LightNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 108: animeshon.knowledge.v1alpha1.LightNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 109: animeshon.knowledge.v1alpha1.LightNovel.volumes:type_name -> animeshon.knowledge.v1alpha1.Edge
+	39,  // 110: animeshon.knowledge.v1alpha1.Organization.foundation_date:type_name -> google.protobuf.Timestamp
+	28,  // 111: animeshon.knowledge.v1alpha1.Organization.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 112: animeshon.knowledge.v1alpha1.Organization.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 113: animeshon.knowledge.v1alpha1.Organization.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 114: animeshon.knowledge.v1alpha1.Organization.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	39,  // 115: animeshon.knowledge.v1alpha1.Person.birthday:type_name -> google.protobuf.Timestamp
+	28,  // 116: animeshon.knowledge.v1alpha1.Person.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 117: animeshon.knowledge.v1alpha1.Person.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 118: animeshon.knowledge.v1alpha1.Person.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 119: animeshon.knowledge.v1alpha1.Person.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	39,  // 120: animeshon.knowledge.v1alpha1.Track.release_date:type_name -> google.protobuf.Timestamp
+	28,  // 121: animeshon.knowledge.v1alpha1.Track.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 122: animeshon.knowledge.v1alpha1.Track.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 123: animeshon.knowledge.v1alpha1.Track.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 124: animeshon.knowledge.v1alpha1.Track.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 125: animeshon.knowledge.v1alpha1.Track.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	33,  // 126: animeshon.knowledge.v1alpha1.Track.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 127: animeshon.knowledge.v1alpha1.Track.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 128: animeshon.knowledge.v1alpha1.Track.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 129: animeshon.knowledge.v1alpha1.Universe.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 130: animeshon.knowledge.v1alpha1.Universe.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 131: animeshon.knowledge.v1alpha1.Universe.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 132: animeshon.knowledge.v1alpha1.Universe.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 133: animeshon.knowledge.v1alpha1.Universe.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	30,  // 134: animeshon.knowledge.v1alpha1.Universe.contents:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 135: animeshon.knowledge.v1alpha1.Universe.canonicals:type_name -> animeshon.knowledge.v1alpha1.Edge
+	28,  // 136: animeshon.knowledge.v1alpha1.VisualNovel.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 137: animeshon.knowledge.v1alpha1.VisualNovel.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 138: animeshon.knowledge.v1alpha1.VisualNovel.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 139: animeshon.knowledge.v1alpha1.VisualNovel.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 140: animeshon.knowledge.v1alpha1.VisualNovel.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	31,  // 141: animeshon.knowledge.v1alpha1.VisualNovel.content_relations:type_name -> animeshon.knowledge.v1alpha1.ContentRelation
+	29,  // 142: animeshon.knowledge.v1alpha1.VisualNovel.runnings:type_name -> animeshon.knowledge.v1alpha1.Running
+	39,  // 143: animeshon.knowledge.v1alpha1.VisualNovel.release_date:type_name -> google.protobuf.Timestamp
+	32,  // 144: animeshon.knowledge.v1alpha1.VisualNovel.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 145: animeshon.knowledge.v1alpha1.VisualNovel.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	30,  // 146: animeshon.knowledge.v1alpha1.VisualNovel.genres:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 147: animeshon.knowledge.v1alpha1.VisualNovel.releases:type_name -> animeshon.knowledge.v1alpha1.Edge
+	37,  // 148: animeshon.knowledge.v1alpha1.VisualNovel.soundtracks:type_name -> animeshon.knowledge.v1alpha1.Soundtrack
+	34,  // 149: animeshon.knowledge.v1alpha1.VisualNovel.voiceactings:type_name -> animeshon.knowledge.v1alpha1.VoiceActing
+	39,  // 150: animeshon.knowledge.v1alpha1.Volume.release_date:type_name -> google.protobuf.Timestamp
+	28,  // 151: animeshon.knowledge.v1alpha1.Volume.names:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 152: animeshon.knowledge.v1alpha1.Volume.aliases:type_name -> animeshon.knowledge.v1alpha1.Text
+	28,  // 153: animeshon.knowledge.v1alpha1.Volume.descriptions:type_name -> animeshon.knowledge.v1alpha1.Text
+	35,  // 154: animeshon.knowledge.v1alpha1.Volume.websites:type_name -> animeshon.knowledge.v1alpha1.Website
+	36,  // 155: animeshon.knowledge.v1alpha1.Volume.marketplaces:type_name -> animeshon.knowledge.v1alpha1.Marketplace
+	32,  // 156: animeshon.knowledge.v1alpha1.Volume.starring:type_name -> animeshon.knowledge.v1alpha1.Cast
+	33,  // 157: animeshon.knowledge.v1alpha1.Volume.staff:type_name -> animeshon.knowledge.v1alpha1.Collaboration
+	39,  // 158: animeshon.knowledge.v1alpha1.Running.start_time:type_name -> google.protobuf.Timestamp
+	39,  // 159: animeshon.knowledge.v1alpha1.Running.end_time:type_name -> google.protobuf.Timestamp
+	30,  // 160: animeshon.knowledge.v1alpha1.ContentRelation.related:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 161: animeshon.knowledge.v1alpha1.Cast.character:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 162: animeshon.knowledge.v1alpha1.Collaboration.collaborator:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 163: animeshon.knowledge.v1alpha1.VoiceActing.voiced:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 164: animeshon.knowledge.v1alpha1.VoiceActing.actor:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 165: animeshon.knowledge.v1alpha1.Soundtrack.track:type_name -> animeshon.knowledge.v1alpha1.Edge
+	30,  // 166: animeshon.knowledge.v1alpha1.TrackListing.musicRelease:type_name -> animeshon.knowledge.v1alpha1.Edge
+	10,  // 167: animeshon.knowledge.v1alpha1.Knowledge.GetContribution:input_type -> animeshon.knowledge.v1alpha1.GetContributionRequest
+	7,   // 168: animeshon.knowledge.v1alpha1.Knowledge.ListContributions:input_type -> animeshon.knowledge.v1alpha1.ListContributionsRequest
+	6,   // 169: animeshon.knowledge.v1alpha1.Knowledge.CreateContribution:input_type -> animeshon.knowledge.v1alpha1.CreateContributionRequest
+	9,   // 170: animeshon.knowledge.v1alpha1.Knowledge.GetContributionChanges:input_type -> animeshon.knowledge.v1alpha1.GetContributionChangesRequest
+	5,   // 171: animeshon.knowledge.v1alpha1.Knowledge.ReviewContribution:input_type -> animeshon.knowledge.v1alpha1.ReviewContributionRequest
+	11,  // 172: animeshon.knowledge.v1alpha1.Knowledge.ApproveContribution:input_type -> animeshon.knowledge.v1alpha1.ApproveContributionRequest
+	12,  // 173: animeshon.knowledge.v1alpha1.Knowledge.RejectContribution:input_type -> animeshon.knowledge.v1alpha1.RejectContributionRequest
+	1,   // 174: animeshon.knowledge.v1alpha1.Knowledge.AllocateResourceName:input_type -> animeshon.knowledge.v1alpha1.AllocateResourceNameRequest
+	4,   // 175: animeshon.knowledge.v1alpha1.Knowledge.GetContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
+	8,   // 176: animeshon.knowledge.v1alpha1.Knowledge.ListContributions:output_type -> animeshon.knowledge.v1alpha1.ListContributionsResponse
+	4,   // 177: animeshon.knowledge.v1alpha1.Knowledge.CreateContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
+	3,   // 178: animeshon.knowledge.v1alpha1.Knowledge.GetContributionChanges:output_type -> animeshon.knowledge.v1alpha1.ContributionChanges
+	4,   // 179: animeshon.knowledge.v1alpha1.Knowledge.ReviewContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
+	4,   // 180: animeshon.knowledge.v1alpha1.Knowledge.ApproveContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
+	4,   // 181: animeshon.knowledge.v1alpha1.Knowledge.RejectContribution:output_type -> animeshon.knowledge.v1alpha1.Contribution
+	2,   // 182: animeshon.knowledge.v1alpha1.Knowledge.AllocateResourceName:output_type -> animeshon.knowledge.v1alpha1.AllocateResourceNameResponse
+	175, // [175:183] is the sub-list for method output_type
+	167, // [167:175] is the sub-list for method input_type
+	167, // [167:167] is the sub-list for extension type_name
+	167, // [167:167] is the sub-list for extension extendee
+	0,   // [0:167] is the sub-list for field type_name
 }
 
 func init() { file_animeshon_knowledge_v1alpha1_knowledge_proto_init() }
@@ -7319,6 +7339,7 @@ func file_animeshon_knowledge_v1alpha1_knowledge_proto_init() {
 		(*EntryEntity_Person)(nil),
 		(*EntryEntity_Track)(nil),
 		(*EntryEntity_Universe)(nil),
+		(*EntryEntity_VisualNovel)(nil),
 		(*EntryEntity_Volume)(nil),
 	}
 	type x struct{}

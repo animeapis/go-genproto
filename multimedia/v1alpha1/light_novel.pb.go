@@ -104,7 +104,7 @@ type LightNovel struct {
 	// The original publishing type of this content.
 	// TODO: migrate this field to a more structured licensing history.
 	PublishingType PublishingType `protobuf:"varint,9,opt,name=publishing_type,json=publishingType,proto3,enum=animeshon.multimedia.v1alpha1.PublishingType" json:"publishing_type,omitempty"`
-	// The current state of the anime.
+	// The current state of the light novel.
 	State State `protobuf:"varint,10,opt,name=state,proto3,enum=animeshon.multimedia.v1alpha1.State" json:"state,omitempty"`
 	// Whether this content is an original work or a derivative work (parody).
 	Original bool `protobuf:"varint,11,opt,name=original,proto3" json:"original,omitempty"`
@@ -550,7 +550,7 @@ type ReconcileLightNovelsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The name of the light novel to reconcile.
-	// Use the wildcard`lightNovels/-` to reconcile all light novels.
+	// Use the wildcard `lightNovels/-` to reconcile all light novels.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 

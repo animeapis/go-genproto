@@ -196,14 +196,10 @@ type AnalyzeCrossRefRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Tollerance of the match in pct
-	Tollerance int32 `protobuf:"varint,1,opt,name=tollerance,proto3" json:"tollerance,omitempty"`
-	// Map of all options for the analysis
-	Opts map[string]bool `protobuf:"bytes,2,rep,name=opts,proto3" json:"opts,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	// Namespaces to analyze
-	Namespaces []string `protobuf:"bytes,3,rep,name=namespaces,proto3" json:"namespaces,omitempty"`
-	// Kinds to analyze
-	TargetKinds []string `protobuf:"bytes,4,rep,name=target_kinds,json=targetKinds,proto3" json:"target_kinds,omitempty"`
+	// Global configuration
+	Config *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	// Kind configurations
+	TargetKinds map[string]*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig `protobuf:"bytes,2,rep,name=target_kinds,json=targetKinds,proto3" json:"target_kinds,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *AnalyzeCrossRefRequest) Reset() {
@@ -238,28 +234,14 @@ func (*AnalyzeCrossRefRequest) Descriptor() ([]byte, []int) {
 	return file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AnalyzeCrossRefRequest) GetTollerance() int32 {
+func (x *AnalyzeCrossRefRequest) GetConfig() *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig {
 	if x != nil {
-		return x.Tollerance
-	}
-	return 0
-}
-
-func (x *AnalyzeCrossRefRequest) GetOpts() map[string]bool {
-	if x != nil {
-		return x.Opts
+		return x.Config
 	}
 	return nil
 }
 
-func (x *AnalyzeCrossRefRequest) GetNamespaces() []string {
-	if x != nil {
-		return x.Namespaces
-	}
-	return nil
-}
-
-func (x *AnalyzeCrossRefRequest) GetTargetKinds() []string {
+func (x *AnalyzeCrossRefRequest) GetTargetKinds() map[string]*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig {
 	if x != nil {
 		return x.TargetKinds
 	}
@@ -2029,6 +2011,186 @@ func (*ExportParodiesResponse) Descriptor() ([]byte, []int) {
 	return file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP(), []int{31}
 }
 
+type AnalyzeCrossRefRequest_AnalyzeCrossRefConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Tollerance of the match in pct
+	Tollerance int32 `protobuf:"varint,1,opt,name=tollerance,proto3" json:"tollerance,omitempty"`
+	// Map of all options for the analysis
+	Opts map[string]bool `protobuf:"bytes,2,rep,name=opts,proto3" json:"opts,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) Reset() {
+	*x = AnalyzeCrossRefRequest_AnalyzeCrossRefConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) ProtoMessage() {}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzeCrossRefRequest_AnalyzeCrossRefConfig.ProtoReflect.Descriptor instead.
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) Descriptor() ([]byte, []int) {
+	return file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP(), []int{2, 0}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) GetTollerance() int32 {
+	if x != nil {
+		return x.Tollerance
+	}
+	return 0
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig) GetOpts() map[string]bool {
+	if x != nil {
+		return x.Opts
+	}
+	return nil
+}
+
+type AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Namespace to analyze
+	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// Optional Namespace specific configuration
+	Config *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) Reset() {
+	*x = AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) ProtoMessage() {}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig.ProtoReflect.Descriptor instead.
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) Descriptor() ([]byte, []int) {
+	return file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP(), []int{2, 1}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig) GetConfig() *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Kind to analyze
+	TargetKind string `protobuf:"bytes,1,opt,name=target_kind,json=targetKind,proto3" json:"target_kind,omitempty"`
+	// Optional Target specific configuration
+	Config *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
+	// Namespace configurations
+	Namespaces map[string]*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig `protobuf:"bytes,3,rep,name=namespaces,proto3" json:"namespaces,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) Reset() {
+	*x = AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) ProtoMessage() {}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig.ProtoReflect.Descriptor instead.
+func (*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) Descriptor() ([]byte, []int) {
+	return file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP(), []int{2, 2}
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) GetTargetKind() string {
+	if x != nil {
+		return x.TargetKind
+	}
+	return ""
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) GetConfig() *AnalyzeCrossRefRequest_AnalyzeCrossRefConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+func (x *AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig) GetNamespaces() map[string]*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig {
+	if x != nil {
+		return x.Namespaces
+	}
+	return nil
+}
+
 type Wormhole_Text struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2041,7 +2203,7 @@ type Wormhole_Text struct {
 func (x *Wormhole_Text) Reset() {
 	*x = Wormhole_Text{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[34]
+		mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2054,7 +2216,7 @@ func (x *Wormhole_Text) String() string {
 func (*Wormhole_Text) ProtoMessage() {}
 
 func (x *Wormhole_Text) ProtoReflect() protoreflect.Message {
-	mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[34]
+	mi := &file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2129,22 +2291,81 @@ var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDesc = []byte{
 	0x22, 0x2d, 0x0a, 0x06, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x08, 0x0a, 0x04, 0x46, 0x55,
 	0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x54, 0x4f, 0x52, 0x41, 0x47, 0x45, 0x10,
 	0x01, 0x12, 0x0c, 0x0a, 0x08, 0x4d, 0x49, 0x47, 0x52, 0x41, 0x54, 0x4f, 0x52, 0x10, 0x02, 0x22,
-	0x88, 0x02, 0x0a, 0x16, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73,
-	0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x74, 0x6f,
-	0x6c, 0x6c, 0x65, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a,
-	0x74, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x52, 0x0a, 0x04, 0x6f, 0x70,
-	0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x3e, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65,
-	0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43,
-	0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x4f,
-	0x70, 0x74, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x12, 0x1e,
-	0x0a, 0x0a, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03,
-	0x28, 0x09, 0x52, 0x0a, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x73, 0x12, 0x21,
-	0x0a, 0x0c, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x6b, 0x69, 0x6e, 0x64, 0x73, 0x18, 0x04,
-	0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x4b, 0x69, 0x6e, 0x64,
-	0x73, 0x1a, 0x37, 0x0a, 0x09, 0x4f, 0x70, 0x74, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10,
-	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
-	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0xb8, 0x09, 0x0a, 0x16, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x62, 0x0a, 0x06, 0x63, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4a, 0x2e, 0x61, 0x6e, 0x69,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73,
+	0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a,
+	0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x06, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x68,
+	0x0a, 0x0c, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x6b, 0x69, 0x6e, 0x64, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x45, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e,
+	0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x54, 0x61, 0x72, 0x67, 0x65,
+	0x74, 0x4b, 0x69, 0x6e, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0b, 0x74, 0x61, 0x72,
+	0x67, 0x65, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x73, 0x1a, 0xda, 0x01, 0x0a, 0x15, 0x41, 0x6e, 0x61,
+	0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x12, 0x1e, 0x0a, 0x0a, 0x74, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x61, 0x6e, 0x63, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x74, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x61, 0x6e,
+	0x63, 0x65, 0x12, 0x68, 0x0a, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x54, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f,
+	0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e,
+	0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72,
+	0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x4f, 0x70, 0x74,
+	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x1a, 0x37, 0x0a, 0x09,
+	0x4f, 0x70, 0x74, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0xa2, 0x01, 0x0a, 0x1e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a,
+	0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x1c, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x61, 0x6d,
+	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x12, 0x62, 0x0a, 0x06, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4a, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68,
+	0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76, 0x31, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f,
+	0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x6e, 0x61,
+	0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x52, 0x06, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0xba, 0x03, 0x0a, 0x1b, 0x41,
+	0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x54, 0x61,
+	0x72, 0x67, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x61,
+	0x72, 0x67, 0x65, 0x74, 0x5f, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0a, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x12, 0x62, 0x0a, 0x06, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4a, 0x2e, 0x61, 0x6e,
+	0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66,
+	0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79,
+	0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65,
+	0x66, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x06, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12,
+	0x80, 0x01, 0x0a, 0x0a, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x73, 0x18, 0x03,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x60, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e,
+	0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79,
+	0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2e, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0a, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x73, 0x1a, 0x92, 0x01, 0x0a, 0x0f, 0x4e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x69, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x53, 0x2e, 0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73,
+	0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72, 0x65, 0x66, 0x73, 0x2e, 0x76, 0x31,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72,
+	0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x41, 0x6e,
+	0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x4e, 0x61, 0x6d,
+	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x05, 0x76, 0x61,
+	0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0x90, 0x01, 0x0a, 0x10, 0x54, 0x61, 0x72, 0x67,
+	0x65, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
+	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x66,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x50, 0x2e,
+	0x61, 0x6e, 0x69, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x6e, 0x2e, 0x63, 0x72, 0x6f, 0x73, 0x73, 0x72,
+	0x65, 0x66, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x61,
+	0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x65, 0x43, 0x72, 0x6f, 0x73, 0x73,
+	0x52, 0x65, 0x66, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52,
 	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x38, 0x0a, 0x0c, 0x43, 0x72,
 	0x6f, 0x73, 0x73, 0x52, 0x65, 0x66, 0x45, 0x64, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61,
 	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14,
@@ -2603,112 +2824,124 @@ func file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDescGZIP() []byte {
 }
 
 var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_goTypes = []interface{}{
-	(ExportCrossRefRequest_Target)(0),     // 0: animeshon.crossrefs.v1alpha1.ExportCrossRefRequest.Target
-	(*ImportCrossRefRequest)(nil),         // 1: animeshon.crossrefs.v1alpha1.ImportCrossRefRequest
-	(*ExportCrossRefRequest)(nil),         // 2: animeshon.crossrefs.v1alpha1.ExportCrossRefRequest
-	(*AnalyzeCrossRefRequest)(nil),        // 3: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest
-	(*CrossRefEdge)(nil),                  // 4: animeshon.crossrefs.v1alpha1.CrossRefEdge
-	(*CrossRef)(nil),                      // 5: animeshon.crossrefs.v1alpha1.CrossRef
-	(*Universe)(nil),                      // 6: animeshon.crossrefs.v1alpha1.Universe
-	(*OperationMetadata)(nil),             // 7: animeshon.crossrefs.v1alpha1.OperationMetadata
-	(*GetCrossRefRequest)(nil),            // 8: animeshon.crossrefs.v1alpha1.GetCrossRefRequest
-	(*CreateCrossRefRequest)(nil),         // 9: animeshon.crossrefs.v1alpha1.CreateCrossRefRequest
-	(*BatchCreateCrossRefsRequest)(nil),   // 10: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest
-	(*UpdateCrossRefRequest)(nil),         // 11: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest
-	(*UpdateCrossRefResponse)(nil),        // 12: animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse
-	(*CrossRefsFilterRequest)(nil),        // 13: animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
-	(*ListCrossRefsRequest)(nil),          // 14: animeshon.crossrefs.v1alpha1.ListCrossRefsRequest
-	(*CountCrossRefsRequest)(nil),         // 15: animeshon.crossrefs.v1alpha1.CountCrossRefsRequest
-	(*BatchCreateCrossRefsResponse)(nil),  // 16: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse
-	(*ListCrossRefsResponse)(nil),         // 17: animeshon.crossrefs.v1alpha1.ListCrossRefsResponse
-	(*CountCrossRefsResponse)(nil),        // 18: animeshon.crossrefs.v1alpha1.CountCrossRefsResponse
-	(*GetUniverseRequest)(nil),            // 19: animeshon.crossrefs.v1alpha1.GetUniverseRequest
-	(*UpdateUniverseRequest)(nil),         // 20: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest
-	(*ExpandUniverseRequest)(nil),         // 21: animeshon.crossrefs.v1alpha1.ExpandUniverseRequest
-	(*ExpandUniverseResponse)(nil),        // 22: animeshon.crossrefs.v1alpha1.ExpandUniverseResponse
-	(*GetWormholeRequest)(nil),            // 23: animeshon.crossrefs.v1alpha1.GetWormholeRequest
-	(*ListWormholeCrossRefsRequest)(nil),  // 24: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsRequest
-	(*ListWormholeCrossRefsResponse)(nil), // 25: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse
-	(*Wormhole)(nil),                      // 26: animeshon.crossrefs.v1alpha1.Wormhole
-	(*AnalyzeCrossRefsResponse)(nil),      // 27: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefsResponse
-	(*ImportCrossRefsResponse)(nil),       // 28: animeshon.crossrefs.v1alpha1.ImportCrossRefsResponse
-	(*ExportCrossRefsResponse)(nil),       // 29: animeshon.crossrefs.v1alpha1.ExportCrossRefsResponse
-	(*AnalyzeParodiesResponse)(nil),       // 30: animeshon.crossrefs.v1alpha1.AnalyzeParodiesResponse
-	(*InitializeCrossRefsResponse)(nil),   // 31: animeshon.crossrefs.v1alpha1.InitializeCrossRefsResponse
-	(*ExportParodiesResponse)(nil),        // 32: animeshon.crossrefs.v1alpha1.ExportParodiesResponse
-	nil,                                   // 33: animeshon.crossrefs.v1alpha1.ImportCrossRefRequest.OptsEntry
-	nil,                                   // 34: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.OptsEntry
-	(*Wormhole_Text)(nil),                 // 35: animeshon.crossrefs.v1alpha1.Wormhole.Text
-	(*timestamppb.Timestamp)(nil),         // 36: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),         // 37: google.protobuf.FieldMask
-	(*emptypb.Empty)(nil),                 // 38: google.protobuf.Empty
-	(*longrunning.Operation)(nil),         // 39: google.longrunning.Operation
+	(ExportCrossRefRequest_Target)(0),                             // 0: animeshon.crossrefs.v1alpha1.ExportCrossRefRequest.Target
+	(*ImportCrossRefRequest)(nil),                                 // 1: animeshon.crossrefs.v1alpha1.ImportCrossRefRequest
+	(*ExportCrossRefRequest)(nil),                                 // 2: animeshon.crossrefs.v1alpha1.ExportCrossRefRequest
+	(*AnalyzeCrossRefRequest)(nil),                                // 3: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest
+	(*CrossRefEdge)(nil),                                          // 4: animeshon.crossrefs.v1alpha1.CrossRefEdge
+	(*CrossRef)(nil),                                              // 5: animeshon.crossrefs.v1alpha1.CrossRef
+	(*Universe)(nil),                                              // 6: animeshon.crossrefs.v1alpha1.Universe
+	(*OperationMetadata)(nil),                                     // 7: animeshon.crossrefs.v1alpha1.OperationMetadata
+	(*GetCrossRefRequest)(nil),                                    // 8: animeshon.crossrefs.v1alpha1.GetCrossRefRequest
+	(*CreateCrossRefRequest)(nil),                                 // 9: animeshon.crossrefs.v1alpha1.CreateCrossRefRequest
+	(*BatchCreateCrossRefsRequest)(nil),                           // 10: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest
+	(*UpdateCrossRefRequest)(nil),                                 // 11: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest
+	(*UpdateCrossRefResponse)(nil),                                // 12: animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse
+	(*CrossRefsFilterRequest)(nil),                                // 13: animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
+	(*ListCrossRefsRequest)(nil),                                  // 14: animeshon.crossrefs.v1alpha1.ListCrossRefsRequest
+	(*CountCrossRefsRequest)(nil),                                 // 15: animeshon.crossrefs.v1alpha1.CountCrossRefsRequest
+	(*BatchCreateCrossRefsResponse)(nil),                          // 16: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse
+	(*ListCrossRefsResponse)(nil),                                 // 17: animeshon.crossrefs.v1alpha1.ListCrossRefsResponse
+	(*CountCrossRefsResponse)(nil),                                // 18: animeshon.crossrefs.v1alpha1.CountCrossRefsResponse
+	(*GetUniverseRequest)(nil),                                    // 19: animeshon.crossrefs.v1alpha1.GetUniverseRequest
+	(*UpdateUniverseRequest)(nil),                                 // 20: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest
+	(*ExpandUniverseRequest)(nil),                                 // 21: animeshon.crossrefs.v1alpha1.ExpandUniverseRequest
+	(*ExpandUniverseResponse)(nil),                                // 22: animeshon.crossrefs.v1alpha1.ExpandUniverseResponse
+	(*GetWormholeRequest)(nil),                                    // 23: animeshon.crossrefs.v1alpha1.GetWormholeRequest
+	(*ListWormholeCrossRefsRequest)(nil),                          // 24: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsRequest
+	(*ListWormholeCrossRefsResponse)(nil),                         // 25: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse
+	(*Wormhole)(nil),                                              // 26: animeshon.crossrefs.v1alpha1.Wormhole
+	(*AnalyzeCrossRefsResponse)(nil),                              // 27: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefsResponse
+	(*ImportCrossRefsResponse)(nil),                               // 28: animeshon.crossrefs.v1alpha1.ImportCrossRefsResponse
+	(*ExportCrossRefsResponse)(nil),                               // 29: animeshon.crossrefs.v1alpha1.ExportCrossRefsResponse
+	(*AnalyzeParodiesResponse)(nil),                               // 30: animeshon.crossrefs.v1alpha1.AnalyzeParodiesResponse
+	(*InitializeCrossRefsResponse)(nil),                           // 31: animeshon.crossrefs.v1alpha1.InitializeCrossRefsResponse
+	(*ExportParodiesResponse)(nil),                                // 32: animeshon.crossrefs.v1alpha1.ExportParodiesResponse
+	nil,                                                           // 33: animeshon.crossrefs.v1alpha1.ImportCrossRefRequest.OptsEntry
+	(*AnalyzeCrossRefRequest_AnalyzeCrossRefConfig)(nil),          // 34: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig
+	(*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig)(nil), // 35: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefNamespaceConfig
+	(*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig)(nil),    // 36: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig
+	nil,                           // 37: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.TargetKindsEntry
+	nil,                           // 38: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig.OptsEntry
+	nil,                           // 39: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig.NamespacesEntry
+	(*Wormhole_Text)(nil),         // 40: animeshon.crossrefs.v1alpha1.Wormhole.Text
+	(*timestamppb.Timestamp)(nil), // 41: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil), // 42: google.protobuf.FieldMask
+	(*emptypb.Empty)(nil),         // 43: google.protobuf.Empty
+	(*longrunning.Operation)(nil), // 44: google.longrunning.Operation
 }
 var file_animeshon_crossrefs_v1alpha1_crossrefs_proto_depIdxs = []int32{
 	33, // 0: animeshon.crossrefs.v1alpha1.ImportCrossRefRequest.opts:type_name -> animeshon.crossrefs.v1alpha1.ImportCrossRefRequest.OptsEntry
 	0,  // 1: animeshon.crossrefs.v1alpha1.ExportCrossRefRequest.target:type_name -> animeshon.crossrefs.v1alpha1.ExportCrossRefRequest.Target
-	34, // 2: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.opts:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.OptsEntry
-	36, // 3: animeshon.crossrefs.v1alpha1.CrossRef.create_time:type_name -> google.protobuf.Timestamp
-	36, // 4: animeshon.crossrefs.v1alpha1.CrossRef.update_time:type_name -> google.protobuf.Timestamp
-	4,  // 5: animeshon.crossrefs.v1alpha1.CrossRef.edges:type_name -> animeshon.crossrefs.v1alpha1.CrossRefEdge
-	36, // 6: animeshon.crossrefs.v1alpha1.OperationMetadata.create_time:type_name -> google.protobuf.Timestamp
-	36, // 7: animeshon.crossrefs.v1alpha1.OperationMetadata.end_time:type_name -> google.protobuf.Timestamp
-	5,  // 8: animeshon.crossrefs.v1alpha1.CreateCrossRefRequest.crossref:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	5,  // 9: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	5,  // 10: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest.crossref:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	37, // 11: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest.update_mask:type_name -> google.protobuf.FieldMask
-	5,  // 12: animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	13, // 13: animeshon.crossrefs.v1alpha1.ListCrossRefsRequest.filter:type_name -> animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
-	13, // 14: animeshon.crossrefs.v1alpha1.CountCrossRefsRequest.filter:type_name -> animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
-	5,  // 15: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	5,  // 16: animeshon.crossrefs.v1alpha1.ListCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	6,  // 17: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest.universe:type_name -> animeshon.crossrefs.v1alpha1.Universe
-	37, // 18: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest.update_mask:type_name -> google.protobuf.FieldMask
-	5,  // 19: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
-	35, // 20: animeshon.crossrefs.v1alpha1.Wormhole.names:type_name -> animeshon.crossrefs.v1alpha1.Wormhole.Text
-	35, // 21: animeshon.crossrefs.v1alpha1.Wormhole.aliases:type_name -> animeshon.crossrefs.v1alpha1.Wormhole.Text
-	36, // 22: animeshon.crossrefs.v1alpha1.Wormhole.date:type_name -> google.protobuf.Timestamp
-	8,  // 23: animeshon.crossrefs.v1alpha1.Referrer.GetCrossRef:input_type -> animeshon.crossrefs.v1alpha1.GetCrossRefRequest
-	14, // 24: animeshon.crossrefs.v1alpha1.Referrer.ListCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ListCrossRefsRequest
-	9,  // 25: animeshon.crossrefs.v1alpha1.Referrer.CreateCrossRef:input_type -> animeshon.crossrefs.v1alpha1.CreateCrossRefRequest
-	10, // 26: animeshon.crossrefs.v1alpha1.Referrer.BatchCreateCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest
-	11, // 27: animeshon.crossrefs.v1alpha1.Referrer.UpdateCrossRef:input_type -> animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest
-	15, // 28: animeshon.crossrefs.v1alpha1.Referrer.CountCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.CountCrossRefsRequest
-	3,  // 29: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest
-	1,  // 30: animeshon.crossrefs.v1alpha1.Referrer.ImportCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ImportCrossRefRequest
-	2,  // 31: animeshon.crossrefs.v1alpha1.Referrer.ExportCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ExportCrossRefRequest
-	38, // 32: animeshon.crossrefs.v1alpha1.Referrer.InitializeCrossRefs:input_type -> google.protobuf.Empty
-	38, // 33: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeParodies:input_type -> google.protobuf.Empty
-	38, // 34: animeshon.crossrefs.v1alpha1.Referrer.ExportParodies:input_type -> google.protobuf.Empty
-	19, // 35: animeshon.crossrefs.v1alpha1.Referrer.GetUniverse:input_type -> animeshon.crossrefs.v1alpha1.GetUniverseRequest
-	20, // 36: animeshon.crossrefs.v1alpha1.Referrer.UpdateUniverse:input_type -> animeshon.crossrefs.v1alpha1.UpdateUniverseRequest
-	21, // 37: animeshon.crossrefs.v1alpha1.Referrer.ExpandUniverse:input_type -> animeshon.crossrefs.v1alpha1.ExpandUniverseRequest
-	23, // 38: animeshon.crossrefs.v1alpha1.Referrer.GetWormhole:input_type -> animeshon.crossrefs.v1alpha1.GetWormholeRequest
-	24, // 39: animeshon.crossrefs.v1alpha1.Referrer.ListWormholeCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsRequest
-	5,  // 40: animeshon.crossrefs.v1alpha1.Referrer.GetCrossRef:output_type -> animeshon.crossrefs.v1alpha1.CrossRef
-	17, // 41: animeshon.crossrefs.v1alpha1.Referrer.ListCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.ListCrossRefsResponse
-	5,  // 42: animeshon.crossrefs.v1alpha1.Referrer.CreateCrossRef:output_type -> animeshon.crossrefs.v1alpha1.CrossRef
-	16, // 43: animeshon.crossrefs.v1alpha1.Referrer.BatchCreateCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse
-	12, // 44: animeshon.crossrefs.v1alpha1.Referrer.UpdateCrossRef:output_type -> animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse
-	18, // 45: animeshon.crossrefs.v1alpha1.Referrer.CountCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.CountCrossRefsResponse
-	39, // 46: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeCrossRefs:output_type -> google.longrunning.Operation
-	39, // 47: animeshon.crossrefs.v1alpha1.Referrer.ImportCrossRefs:output_type -> google.longrunning.Operation
-	39, // 48: animeshon.crossrefs.v1alpha1.Referrer.ExportCrossRefs:output_type -> google.longrunning.Operation
-	39, // 49: animeshon.crossrefs.v1alpha1.Referrer.InitializeCrossRefs:output_type -> google.longrunning.Operation
-	39, // 50: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeParodies:output_type -> google.longrunning.Operation
-	39, // 51: animeshon.crossrefs.v1alpha1.Referrer.ExportParodies:output_type -> google.longrunning.Operation
-	6,  // 52: animeshon.crossrefs.v1alpha1.Referrer.GetUniverse:output_type -> animeshon.crossrefs.v1alpha1.Universe
-	6,  // 53: animeshon.crossrefs.v1alpha1.Referrer.UpdateUniverse:output_type -> animeshon.crossrefs.v1alpha1.Universe
-	22, // 54: animeshon.crossrefs.v1alpha1.Referrer.ExpandUniverse:output_type -> animeshon.crossrefs.v1alpha1.ExpandUniverseResponse
-	26, // 55: animeshon.crossrefs.v1alpha1.Referrer.GetWormhole:output_type -> animeshon.crossrefs.v1alpha1.Wormhole
-	25, // 56: animeshon.crossrefs.v1alpha1.Referrer.ListWormholeCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse
-	40, // [40:57] is the sub-list for method output_type
-	23, // [23:40] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	34, // 2: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.config:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig
+	37, // 3: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.target_kinds:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.TargetKindsEntry
+	41, // 4: animeshon.crossrefs.v1alpha1.CrossRef.create_time:type_name -> google.protobuf.Timestamp
+	41, // 5: animeshon.crossrefs.v1alpha1.CrossRef.update_time:type_name -> google.protobuf.Timestamp
+	4,  // 6: animeshon.crossrefs.v1alpha1.CrossRef.edges:type_name -> animeshon.crossrefs.v1alpha1.CrossRefEdge
+	41, // 7: animeshon.crossrefs.v1alpha1.OperationMetadata.create_time:type_name -> google.protobuf.Timestamp
+	41, // 8: animeshon.crossrefs.v1alpha1.OperationMetadata.end_time:type_name -> google.protobuf.Timestamp
+	5,  // 9: animeshon.crossrefs.v1alpha1.CreateCrossRefRequest.crossref:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	5,  // 10: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	5,  // 11: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest.crossref:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	42, // 12: animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest.update_mask:type_name -> google.protobuf.FieldMask
+	5,  // 13: animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	13, // 14: animeshon.crossrefs.v1alpha1.ListCrossRefsRequest.filter:type_name -> animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
+	13, // 15: animeshon.crossrefs.v1alpha1.CountCrossRefsRequest.filter:type_name -> animeshon.crossrefs.v1alpha1.CrossRefsFilterRequest
+	5,  // 16: animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	5,  // 17: animeshon.crossrefs.v1alpha1.ListCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	6,  // 18: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest.universe:type_name -> animeshon.crossrefs.v1alpha1.Universe
+	42, // 19: animeshon.crossrefs.v1alpha1.UpdateUniverseRequest.update_mask:type_name -> google.protobuf.FieldMask
+	5,  // 20: animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse.crossrefs:type_name -> animeshon.crossrefs.v1alpha1.CrossRef
+	40, // 21: animeshon.crossrefs.v1alpha1.Wormhole.names:type_name -> animeshon.crossrefs.v1alpha1.Wormhole.Text
+	40, // 22: animeshon.crossrefs.v1alpha1.Wormhole.aliases:type_name -> animeshon.crossrefs.v1alpha1.Wormhole.Text
+	41, // 23: animeshon.crossrefs.v1alpha1.Wormhole.date:type_name -> google.protobuf.Timestamp
+	38, // 24: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig.opts:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig.OptsEntry
+	34, // 25: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefNamespaceConfig.config:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig
+	34, // 26: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig.config:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefConfig
+	39, // 27: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig.namespaces:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig.NamespacesEntry
+	36, // 28: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.TargetKindsEntry.value:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig
+	35, // 29: animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefTargetConfig.NamespacesEntry.value:type_name -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest.AnalyzeCrossRefNamespaceConfig
+	8,  // 30: animeshon.crossrefs.v1alpha1.Referrer.GetCrossRef:input_type -> animeshon.crossrefs.v1alpha1.GetCrossRefRequest
+	14, // 31: animeshon.crossrefs.v1alpha1.Referrer.ListCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ListCrossRefsRequest
+	9,  // 32: animeshon.crossrefs.v1alpha1.Referrer.CreateCrossRef:input_type -> animeshon.crossrefs.v1alpha1.CreateCrossRefRequest
+	10, // 33: animeshon.crossrefs.v1alpha1.Referrer.BatchCreateCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsRequest
+	11, // 34: animeshon.crossrefs.v1alpha1.Referrer.UpdateCrossRef:input_type -> animeshon.crossrefs.v1alpha1.UpdateCrossRefRequest
+	15, // 35: animeshon.crossrefs.v1alpha1.Referrer.CountCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.CountCrossRefsRequest
+	3,  // 36: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.AnalyzeCrossRefRequest
+	1,  // 37: animeshon.crossrefs.v1alpha1.Referrer.ImportCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ImportCrossRefRequest
+	2,  // 38: animeshon.crossrefs.v1alpha1.Referrer.ExportCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ExportCrossRefRequest
+	43, // 39: animeshon.crossrefs.v1alpha1.Referrer.InitializeCrossRefs:input_type -> google.protobuf.Empty
+	43, // 40: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeParodies:input_type -> google.protobuf.Empty
+	43, // 41: animeshon.crossrefs.v1alpha1.Referrer.ExportParodies:input_type -> google.protobuf.Empty
+	19, // 42: animeshon.crossrefs.v1alpha1.Referrer.GetUniverse:input_type -> animeshon.crossrefs.v1alpha1.GetUniverseRequest
+	20, // 43: animeshon.crossrefs.v1alpha1.Referrer.UpdateUniverse:input_type -> animeshon.crossrefs.v1alpha1.UpdateUniverseRequest
+	21, // 44: animeshon.crossrefs.v1alpha1.Referrer.ExpandUniverse:input_type -> animeshon.crossrefs.v1alpha1.ExpandUniverseRequest
+	23, // 45: animeshon.crossrefs.v1alpha1.Referrer.GetWormhole:input_type -> animeshon.crossrefs.v1alpha1.GetWormholeRequest
+	24, // 46: animeshon.crossrefs.v1alpha1.Referrer.ListWormholeCrossRefs:input_type -> animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsRequest
+	5,  // 47: animeshon.crossrefs.v1alpha1.Referrer.GetCrossRef:output_type -> animeshon.crossrefs.v1alpha1.CrossRef
+	17, // 48: animeshon.crossrefs.v1alpha1.Referrer.ListCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.ListCrossRefsResponse
+	5,  // 49: animeshon.crossrefs.v1alpha1.Referrer.CreateCrossRef:output_type -> animeshon.crossrefs.v1alpha1.CrossRef
+	16, // 50: animeshon.crossrefs.v1alpha1.Referrer.BatchCreateCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.BatchCreateCrossRefsResponse
+	12, // 51: animeshon.crossrefs.v1alpha1.Referrer.UpdateCrossRef:output_type -> animeshon.crossrefs.v1alpha1.UpdateCrossRefResponse
+	18, // 52: animeshon.crossrefs.v1alpha1.Referrer.CountCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.CountCrossRefsResponse
+	44, // 53: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeCrossRefs:output_type -> google.longrunning.Operation
+	44, // 54: animeshon.crossrefs.v1alpha1.Referrer.ImportCrossRefs:output_type -> google.longrunning.Operation
+	44, // 55: animeshon.crossrefs.v1alpha1.Referrer.ExportCrossRefs:output_type -> google.longrunning.Operation
+	44, // 56: animeshon.crossrefs.v1alpha1.Referrer.InitializeCrossRefs:output_type -> google.longrunning.Operation
+	44, // 57: animeshon.crossrefs.v1alpha1.Referrer.AnalyzeParodies:output_type -> google.longrunning.Operation
+	44, // 58: animeshon.crossrefs.v1alpha1.Referrer.ExportParodies:output_type -> google.longrunning.Operation
+	6,  // 59: animeshon.crossrefs.v1alpha1.Referrer.GetUniverse:output_type -> animeshon.crossrefs.v1alpha1.Universe
+	6,  // 60: animeshon.crossrefs.v1alpha1.Referrer.UpdateUniverse:output_type -> animeshon.crossrefs.v1alpha1.Universe
+	22, // 61: animeshon.crossrefs.v1alpha1.Referrer.ExpandUniverse:output_type -> animeshon.crossrefs.v1alpha1.ExpandUniverseResponse
+	26, // 62: animeshon.crossrefs.v1alpha1.Referrer.GetWormhole:output_type -> animeshon.crossrefs.v1alpha1.Wormhole
+	25, // 63: animeshon.crossrefs.v1alpha1.Referrer.ListWormholeCrossRefs:output_type -> animeshon.crossrefs.v1alpha1.ListWormholeCrossRefsResponse
+	47, // [47:64] is the sub-list for method output_type
+	30, // [30:47] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_animeshon_crossrefs_v1alpha1_crossrefs_proto_init() }
@@ -3101,7 +3334,43 @@ func file_animeshon_crossrefs_v1alpha1_crossrefs_proto_init() {
 				return nil
 			}
 		}
+		file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnalyzeCrossRefRequest_AnalyzeCrossRefConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnalyzeCrossRefRequest_AnalyzeCrossRefNamespaceConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnalyzeCrossRefRequest_AnalyzeCrossRefTargetConfig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_animeshon_crossrefs_v1alpha1_crossrefs_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Wormhole_Text); i {
 			case 0:
 				return &v.state
@@ -3120,7 +3389,7 @@ func file_animeshon_crossrefs_v1alpha1_crossrefs_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_animeshon_crossrefs_v1alpha1_crossrefs_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   35,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

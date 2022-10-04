@@ -8,8 +8,8 @@ package admin
 
 import (
 	context "context"
+	_ "github.com/animeapis/protoc-gen-graphql/protobuf/graphql"
 	_ "github.com/google/gnostic/openapiv3"
-	_ "github.com/opendoor-labs/protoc-gen-graphql/protobuf/graphql"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/genproto/googleapis/iam/v1"
 	_ "google.golang.org/genproto/googleapis/longrunning"
